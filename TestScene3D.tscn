@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://y82xvcax1bvs"]
+
+[ext_resource type="Material" uid="uid://cbq7bdvqf7soh" path="res://Materials/testMaterial.tres" id="1_pfxhe"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_s3gm3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j6fmx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6dqoi"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Snow" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Snow"]
+transform = Transform3D(0.999996, 0.00256793, -0.00118375, -0.0025945, 0.999732, -0.0230189, 0.00112433, 0.0230218, 0.999734, 0.0499608, 4.02064, 0.0236374)
+material_override = ExtResource("1_pfxhe")
+mesh = SubResource("SphereMesh_s3gm3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Snow"]
+transform = Transform3D(1.23444, 0.00321179, -0.201214, -0.00780146, 1.2504, -0.0279026, 0.201088, 0.0287942, 1.23413, 0.113863, 2.99849, 0.071411)
+material_override = ExtResource("1_pfxhe")
+mesh = SubResource("SphereMesh_s3gm3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Snow"]
+transform = Transform3D(1.61482, 0.0042015, -0.263217, -0.0102055, 1.6357, -0.0365007, 0.263053, 0.037667, 1.61442, 0.162906, 1.95127, 0.132175)
+material_override = ExtResource("1_pfxhe")
+mesh = SubResource("SphereMesh_s3gm3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Snow"]
+transform = Transform3D(-0.0191219, -0.00105096, 1.73823, -0.0300932, 0.149128, -0.0103385, -0.208975, -0.0213788, -0.157565, 0.121091, 3.31971, 0.0134985)
+material_override = ExtResource("1_pfxhe")
+mesh = SubResource("BoxMesh_j6fmx")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.775041, -0.565716, 0.281563, 0.474692, 0.815333, 0.331512, -0.417109, -0.12328, 0.900457, 1.69759, 4.89969, 4.29265)
+light_energy = 1.152
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(-0.825738, 0.0950083, 0.555995, 0.386043, -0.623491, 0.679875, 0.411251, 0.776037, 0.478163, 2.42958, 3.1667, -1.42541)
+light_color = Color(1, 0.0705882, 0, 1)
+light_energy = 9.533
+omni_range = 6.341
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.29617, 0, 0, 0, 1, 0, 0, 0, 4.78137, -0.227496, 0.839065, -0.448061)
+mesh = SubResource("PlaneMesh_6dqoi")

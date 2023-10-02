@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://buceqxu5f1lty"]
+
+[ext_resource type="Script" path="res://playerBullet.gd" id="1_kay7j"]
+[ext_resource type="Texture2D" uid="uid://ydbe1tyhvygu" path="res://Sprites/Objects/tile_0151.png" id="2_t350c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjspw"]
+
+[node name="Bullet" type="Area2D" groups=["Target"]]
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_kay7j")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_t350c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.689115, 0.689115)
+shape = SubResource("CircleShape2D_bjspw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://e5pohnnsoh65"]
+
+[ext_resource type="Texture2D" uid="uid://b0tccu5u1or5q" path="res://Sprites/Coin.png" id="1_3kwjb"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(618, 273)
+texture = ExtResource("1_3kwjb")
