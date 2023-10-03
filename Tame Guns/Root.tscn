@@ -620,12 +620,12 @@ animation = &"Standing"
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_kbxl0")
 
+[node name="shotSpawn" type="Marker2D" parent="Player"]
+position = Vector2(-1, 1)
+
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -63)
 zoom = Vector2(3.5, 3.5)
-
-[node name="shotSpawn" type="Marker2D" parent="Player"]
-position = Vector2(-1, 1)
 
 [node name="Debug" type="CanvasLayer" parent="Player"]
 
@@ -638,4 +638,3 @@ visible = false
 position = Vector2(-321, 93)
 
 [node name="Crosshair" parent="." instance=ExtResource("5_glxh8")]
-position = Vector2(-342, 50)

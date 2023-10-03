@@ -4,10 +4,12 @@ var moveSpeed : float = 75
 var jumpForce : float = 150
 var gravity : float = 700
 
+var updateCrossHairPos : Vector2
+
 var bullet = preload ("res://Bullet.tscn") # Preload the bullet scene so it can spawn
 var canFire = true
 
-@export var fireRate = .3
+@export var fireRate = .1
 
 func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and canFire: # If the Cooldown for firing is up, fire if left mouse button has been clicked
@@ -23,6 +25,8 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		
 	velocity.x = 0
+	
+	updateCrossHairPos = get_node("../Crosshair").global_position
 	
 	if Input.is_key_pressed(KEY_A):
 		velocity.x -= moveSpeed
