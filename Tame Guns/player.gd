@@ -9,7 +9,7 @@ var updateCrossHairPos : Vector2
 var bullet = preload ("res://Bullet.tscn") # Preload the bullet scene so it can spawn
 var canFire = true
 
-@export var fireRate = .1
+@export var fireRate = .3
 
 func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and canFire: # If the Cooldown for firing is up, fire if left mouse button has been clicked

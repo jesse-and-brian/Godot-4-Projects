@@ -1,8 +1,7 @@
 extends Area2D
 
-@onready var speed = 3 # bullet speed multiplier
+@onready var speed = 2 # bullet speed multiplier
 @onready var target = get_node("../Crosshair").global_position # store location of Crosshair node at creation of bullet instance
-#@onready var globalCrossHair = get_node("../Player").updateCrossHairPos # store location of Crosshair node when player moves
 @onready var playerLocation = get_node("../Player").global_position
 @onready var playerVel = get_node("../Player").velocity
 
@@ -10,13 +9,15 @@ extends Area2D
 
 
 func _ready():
-	print(target) # print location of Crosshair node at creation of bullet instance
+	pass
+	#print(target) # print location of Crosshair node at creation of bullet instance
 
 func _physics_process(delta):
 	#global_position += target * speed * delta
-	playerLocation = get_node("../Player").global_position
-	global_position += ((target - playerLocation) * speed  * delta)
 	
+	print(target - playerLocation)
+	position += ((target - playerLocation) * speed  * delta)
+
 	
 	scale += Vector2(-.1,-.1) * 8 * delta # Make bullets get smaller as they travel
 	
