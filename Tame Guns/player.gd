@@ -1,3 +1,4 @@
+
 extends CharacterBody2D
 
 var moveSpeed : float = 75
@@ -5,10 +6,12 @@ var jumpForce : float = 150
 var gravity : float = 700
 
 var updateCrossHairPos : Vector2
-
+@export var characterVector : Vector2
 var bullet = preload ("res://Bullet.tscn") # Preload the bullet scene so it can spawn
 var canFire = true
-
+@export var isMoving := false
+@export var isntMoving := true
+@export var isJumping := false
 @export var fireRate = .3
 
 func _process(_delta):
@@ -20,6 +23,7 @@ func _process(_delta):
 		await get_tree().create_timer(fireRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
 		canFire = true # Set fire back to true so can fire again
 
+#var velocity = Vector2.ZERO
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -30,10 +34,16 @@ func _physics_process(delta):
 	
 	if Input.is_key_pressed(KEY_A):
 		velocity.x -= moveSpeed
+		isMoving = true
+		isntMoving = false
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += moveSpeed
+		isMoving = true
+		isntMoving = false
+
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
 		velocity.y = -jumpForce
+		isJumping = true
 	move_and_slide()
 	
 	if global_position.y > 150:
