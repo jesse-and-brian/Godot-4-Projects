@@ -9,9 +9,9 @@ var updateCrossHairPos : Vector2
 @export var characterVector : Vector2
 var bullet = preload ("res://Bullet.tscn") # Preload the bullet scene so it can spawn
 var canFire = true
-@export var isMoving := false
-@export var isntMoving := true
-@export var isJumping := false
+var isMoving := false
+var isJumping := false
+
 @export var fireRate = .3
 
 func _process(_delta):
@@ -27,23 +27,24 @@ func _process(_delta):
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
-	velocity.x = 0
 	
 	updateCrossHairPos = get_node("../Crosshair").global_position
+	
+	velocity.x = 0
+	isMoving = false
 	
 	if Input.is_key_pressed(KEY_A):
 		velocity.x -= moveSpeed
 		isMoving = true
-		isntMoving = false
+	
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += moveSpeed
 		isMoving = true
-		isntMoving = false
 
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
 		velocity.y = -jumpForce
 		isJumping = true
+		
 	move_and_slide()
 	
 	if global_position.y > 150:
