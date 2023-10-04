@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bqb4j84403j2a" path="res://Sprites/Characters/character_0000.png" id="3_cvjv5"]
 [ext_resource type="Texture2D" uid="uid://2k3iywmsqila" path="res://Sprites/Characters/character_0001.png" id="4_qlgbn"]
 [ext_resource type="PackedScene" uid="uid://bcbkdwi11hnp7" path="res://crosshair.tscn" id="5_glxh8"]
-[ext_resource type="PackedScene" uid="uid://buceqxu5f1lty" path="res://Bullet.tscn" id="7_ase0c"]
+[ext_resource type="PackedScene" uid="uid://d24rcpyuk1npp" path="res://playerbullet.tscn" id="8_xtrvn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s7oei"]
 texture = ExtResource("1_d20yv")
@@ -640,11 +640,15 @@ offset_bottom = 23.0
 [node name="Camera" type="Camera2D" parent="Player"]
 position = Vector2(0, -63)
 zoom = Vector2(3, 3)
+drag_horizontal_enabled = true
+drag_left_margin = 0.3
 drag_top_margin = 0.8
+drag_right_margin = 0.3
 drag_bottom_margin = 0.0
 
-[node name="Bullet" parent="." instance=ExtResource("7_ase0c")]
-visible = false
-position = Vector2(-321, 93)
-
 [node name="Crosshair" parent="." instance=ExtResource("5_glxh8")]
+
+[node name="PlayerBullet" parent="." instance=ExtResource("8_xtrvn")]
+disable_mode = 1
+collision_layer = 0
+collision_mask = 0
