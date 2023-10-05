@@ -10,8 +10,8 @@ var characterVector : Vector2
 
 var bullet = preload ("res://playerbullet.tscn") # Preload the bullet scene so it can spawn
 var canFire = true
-var isMoving := false
-var isJumping := false
+var isMoving = false
+var isJumping = false
 
 @export var fireRate = .3
 
@@ -32,18 +32,21 @@ func _physics_process(delta):
 	velocity.x = 0
 	isMoving = false
 	
-	if velocity.x != 0:
-		isMoving = true
-	
 	if Input.is_key_pressed(KEY_A):
 		velocity.x -= moveSpeed
+		print(velocity)
 
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += moveSpeed
+		print(velocity)
 
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
 		velocity.y = -jumpForce
 		isJumping = true
+
+	if velocity.x == -75 or velocity.x == 75:
+		isMoving = true
+		
 		
 	move_and_slide() # Need this to move when two objects are colliding (The floor and player). See documentation
 	
