@@ -32,13 +32,14 @@ func _physics_process(delta):
 	velocity.x = 0
 	isMoving = false
 	
-	if Input.is_key_pressed(KEY_A):
-		velocity.x -= moveSpeed
+	if velocity.x != 0:
 		isMoving = true
 	
+	if Input.is_key_pressed(KEY_A):
+		velocity.x -= moveSpeed
+
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += moveSpeed
-		isMoving = true
 
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
 		velocity.y = -jumpForce
