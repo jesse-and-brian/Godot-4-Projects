@@ -1,21 +1,34 @@
 extends Area2D
 
-@onready var speed = 3 # bullet speed multiplier
-@onready var closeSpeed = 6 # if close, shoot faster
-@onready var target = get_node("../Crosshair").global_position 		# Location of Crosshair on bullet creation
-@onready var playerLocation = get_node("../Player").global_position # Location of player on bullet creation
-@onready var cameraPosition = get_node("../").cameraPosition        # Camera's target position, in global coordinates on bullet creation
+@onready var speed = 3 												 # bullet speed multiplier
+#@onready var closeSpeed = 6 										 # if close, shoot faster
+@onready var target = get_node("../Crosshair").global_position 		 # Location of Crosshair on bullet creation
+@onready var playerLocation = get_node("../Player").global_position  # Location of player on bullet creation
+@onready var playerMoving = get_node("../Player").isMoving			 # Is Player moving yes/no
+@onready var cameraPosition = get_node("../").cameraPosition         # Camera's target position, in global coordinates on bullet creation
 
 func _ready():
 	pass
 	#print(target) # print location of Crosshair node at creation of bullet instance
 	
+func _process(delta):
+	#position += (target - playerLocation) * speed * delta
+	
+	
+	if playerMoving == false:
+		position = position.move_toward(target, speed)
+	
+	
+	if playerMoving and target != get_node("../Crosshair").global_position:
+		position = position.move_toward(get_node("../Crosshair").global_position, speed)
 
 func _physics_process(delta):
+	pass
+	#position += (target - playerLocation) * speed * delta
 	
-	print(playerLocation - target)
 	
-	position += (target - playerLocation) * speed * delta
+		
+		
 	
 #	if (playerLocation.y - target.y) >= 50:
 #		position += (target - playerLocation) * speed  * delta
@@ -35,5 +48,4 @@ func _physics_process(delta):
 	await get_tree().create_timer(10).timeout
 	queue_free()
 	
-#func _process(delta):
-#	pass
+
