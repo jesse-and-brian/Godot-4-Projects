@@ -1,5 +1,7 @@
 extends Area2D
+class_name playerBullet
 
+### Public variables ###
 @onready var speed = 4 												 # bullet speed multiplier
 @onready var playerMoving = get_node("../Player").isMoving			 # Is Player moving yes/no
 @onready var playerLocation = get_node("../Player").global_position  # Location of player on bullet creation
