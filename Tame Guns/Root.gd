@@ -6,6 +6,11 @@ var cameraPosition :  Vector2
 func _ready():
 	pass # Replace with function body.
 
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			get_tree().quit()
+
 func _physics_process(delta):
 	cameraPosition = $Player/Camera.get_target_position()
 	#print(cameraPosition)

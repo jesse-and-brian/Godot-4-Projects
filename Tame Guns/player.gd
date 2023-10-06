@@ -34,11 +34,11 @@ func _physics_process(delta):
 	
 	if Input.is_key_pressed(KEY_A):
 		velocity.x -= moveSpeed
-		print(velocity)
+		#print(velocity)
 
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += moveSpeed
-		print(velocity)
+		#print(velocity)
 
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
 		velocity.y = -jumpForce
@@ -53,6 +53,6 @@ func _physics_process(delta):
 	if global_position.y > 150: # if you fall off the side of the level, it reloads the scene
 		game_over()
 	
-func game_over (): # Just reloads the screen on death
+func game_over(): # Just reloads the screen on death
 	get_tree().reload_current_scene()
 	

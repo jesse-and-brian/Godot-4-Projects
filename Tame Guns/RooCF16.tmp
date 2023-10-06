@@ -1,13 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://deixco0ui4uk7"]
+[gd_scene load_steps=13 format=3 uid="uid://deixco0ui4uk7"]
 
 [ext_resource type="Script" path="res://Root.gd" id="1_58q0u"]
 [ext_resource type="Texture2D" uid="uid://biwond464pw3f" path="res://Sprites/Tiles/tiles_packed.png" id="1_d20yv"]
 [ext_resource type="Script" path="res://player.gd" id="2_faqox"]
 [ext_resource type="Texture2D" uid="uid://bqb4j84403j2a" path="res://Sprites/Characters/character_0000.png" id="3_cvjv5"]
-[ext_resource type="Texture2D" uid="uid://dhjjai1d20hxc" path="res://Sprites/Tiles/clint_stand-sheet.png" id="4_luqsk"]
 [ext_resource type="Texture2D" uid="uid://2k3iywmsqila" path="res://Sprites/Characters/character_0001.png" id="4_qlgbn"]
 [ext_resource type="PackedScene" uid="uid://bcbkdwi11hnp7" path="res://crosshair.tscn" id="5_glxh8"]
-[ext_resource type="Texture2D" uid="uid://cmieo5cf1d260" path="res://Sprites/Tiles/clint_run-Sheet.png" id="5_ixvov"]
 [ext_resource type="PackedScene" uid="uid://b1lbh0yt6g24a" path="res://enemy.tscn" id="8_lrjlh"]
 [ext_resource type="PackedScene" uid="uid://d24rcpyuk1npp" path="res://playerbullet.tscn" id="8_xtrvn"]
 
@@ -589,74 +587,8 @@ texture_region_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_s7oei")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_isoyg"]
-atlas = ExtResource("4_luqsk")
-region = Rect2(0, 0, 31, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gyd87"]
-atlas = ExtResource("4_luqsk")
-region = Rect2(31, 0, 31, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oegmo"]
-atlas = ExtResource("5_ixvov")
-region = Rect2(0, 0, 47, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5k7ox"]
-atlas = ExtResource("5_ixvov")
-region = Rect2(47, 0, 47, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ik761"]
-atlas = ExtResource("5_ixvov")
-region = Rect2(94, 0, 47, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mjkxw"]
-atlas = ExtResource("5_ixvov")
-region = Rect2(141, 0, 47, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ua15o"]
-atlas = ExtResource("5_ixvov")
-region = Rect2(188, 0, 47, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1aff"]
-atlas = ExtResource("5_ixvov")
-region = Rect2(235, 0, 47, 66)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_v4pcy"]
 animations = [{
-"frames": [{
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_isoyg")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_gyd87")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 30.0
-}, {
-"frames": [{
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_oegmo")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_5k7ox")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_ik761")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_mjkxw")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_ua15o")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_k1aff")
-}],
-"loop": true,
-"name": &"Run",
-"speed": 30.0
-}, {
 "frames": [{
 "duration": 8.0,
 "texture": ExtResource("3_cvjv5")
@@ -670,7 +602,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kbxl0"]
-size = Vector2(16, 57)
+size = Vector2(14, 22)
 
 [node name="Root" type="Node2D"]
 script = ExtResource("1_58q0u")
@@ -689,17 +621,15 @@ collision_mask = 3
 script = ExtResource("2_faqox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
-position = Vector2(-3.5, -1)
 sprite_frames = SubResource("SpriteFrames_v4pcy")
-animation = &"Run"
-autoplay = "Idle"
+animation = &"Standing"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(1.5, 0.5)
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_kbxl0")
 
 [node name="shotSpawn" type="Marker2D" parent="Player"]
-position = Vector2(1.5, -16)
+position = Vector2(-1, 1)
 
 [node name="Debug" type="CanvasLayer" parent="Player"]
 
@@ -708,7 +638,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Camera" type="Camera2D" parent="Player"]
-position = Vector2(1.5, -5)
+position = Vector2(0, -63)
 zoom = Vector2(3, 3)
 drag_horizontal_enabled = true
 drag_left_margin = 0.3
@@ -719,6 +649,7 @@ drag_bottom_margin = 0.0
 [node name="Crosshair" parent="." instance=ExtResource("5_glxh8")]
 
 [node name="PlayerBullet" parent="." instance=ExtResource("8_xtrvn")]
+visible = false
 disable_mode = 1
 collision_layer = 0
 collision_mask = 0
