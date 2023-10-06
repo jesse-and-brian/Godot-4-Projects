@@ -35,8 +35,11 @@ func _physics_process(delta):
 	isMoving = false
 	print(isJumping)
 		
-	if velocity.y == 0:
+	if is_on_floor():
 		isJumping = false
+	
+	if !is_on_floor():
+		isJumping = true
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -49,7 +52,6 @@ func _physics_process(delta):
 		
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor() and canJump:
 		velocity.y = -jumpForce
-		isJumping = true
 		canJump = false # Set ability to fire to false, so can't fire
 		await get_tree().create_timer(jumpRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
 		canJump = true # Set fire back to true so can fire again
@@ -59,9 +61,6 @@ func _physics_process(delta):
 	
 	if velocity.x == -65 or velocity.x == 65:
 		isMoving = true
-
-#	if isJumping:
-#		_animated_sprite.play("Jump-n")
 	
 	if velocity.x == -65:
 		_animated_sprite.flip_h = true
