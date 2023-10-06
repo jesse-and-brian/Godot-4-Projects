@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpdowbgya77eb"
-path="res://.godot/imported/tiles_packed.png-a1e0c89546b8dfcd2c35f086e2cbf162.ctex"
+uid="uid://pi2jykp3xaqq"
+path="res://.godot/imported/clint_run-Sheet.png-9b765be4311d85e1cc2c7f1310944291.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/tiles_packed.png"
-dest_files=["res://.godot/imported/tiles_packed.png-a1e0c89546b8dfcd2c35f086e2cbf162.ctex"]
+source_file="res://Sprites/Sprite Sheets/clint_run-Sheet.png"
+dest_files=["res://.godot/imported/clint_run-Sheet.png-9b765be4311d85e1cc2c7f1310944291.ctex"]
 
 [params]
 

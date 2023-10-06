@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhjjai1d20hxc"
-path="res://.godot/imported/clint_stand-sheet.png-01bb63cba9e7ab83f7f63b0b5f0d4c38.ctex"
+uid="uid://dqm03f0voofyw"
+path="res://.godot/imported/clint_stand-sheet-Sheet.png-15214b6cc1ea042aedd0763f194fb17b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/clint_stand-sheet.png"
-dest_files=["res://.godot/imported/clint_stand-sheet.png-01bb63cba9e7ab83f7f63b0b5f0d4c38.ctex"]
+source_file="res://Sprites/Sprite Sheets/clint_stand-sheet-Sheet.png"
+dest_files=["res://.godot/imported/clint_stand-sheet-Sheet.png-15214b6cc1ea042aedd0763f194fb17b.ctex"]
 
 [params]
 

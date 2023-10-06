@@ -1,8 +1,8 @@
 
 extends CharacterBody2D
 
-var moveSpeed : float = 75
-var jumpForce : float = 150
+var moveSpeed : float = 65
+var jumpForce : float = 200
 var gravity : float = 700
 
 var updateCrossHairPos : Vector2
@@ -12,6 +12,8 @@ var bullet = preload ("res://playerbullet.tscn") # Preload the bullet scene so i
 var canFire = true
 var isMoving = false
 var isJumping = false
+
+@onready var _animated_sprite = $AnimatedSprite2D
 
 @export var fireRate = .3
 
@@ -26,26 +28,45 @@ func _process(_delta):
 
 #var velocity = Vector2.ZERO
 func _physics_process(delta):
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	
+
 	velocity.x = 0
 	isMoving = false
 	
+	if velocity.y == 0:
+		isJumping = false
+	
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		
 	if Input.is_key_pressed(KEY_A):
 		velocity.x -= moveSpeed
-		#print(velocity)
 
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += moveSpeed
-		#print(velocity)
-
+		
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
 		velocity.y = -jumpForce
+		_animated_sprite.play("Jump-n")
 		isJumping = true
 
-	if velocity.x == -75 or velocity.x == 75:
+	print(isJumping)
+	
+	if velocity.x == -65 or velocity.x == 65:
 		isMoving = true
+
+#	if isJumping:
+#		_animated_sprite.play("Jump-n")
+	
+	if !isMoving and !isJumping:
+		_animated_sprite.play("Idle")
+	
+	if isMoving and !isJumping:
+		_animated_sprite.play("Run")
+		if velocity.x == -65:
+			_animated_sprite.flip_h = true
+		else:
+			_animated_sprite.flip_h = false
+	
 		
 		
 	move_and_slide() # Need this to move when two objects are colliding (The floor and player). See documentation

@@ -17,8 +17,8 @@ func _unhandled_input(event):
 	#var mouseVelocity = event.velocity
 #
 	if event is InputEventMouseMotion: # triggers if mouse has motion 
-
-		print(event)
+		pass
+		#print(event)
 		
 #		if event.velocity == Vector2(0,0):
 #			await get_tree().create_timer(5).timeout

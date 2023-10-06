@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmieo5cf1d260"
-path="res://.godot/imported/clint_run-Sheet.png-ee051ef945855c4e49f082d551f4ed71.ctex"
+uid="uid://bjtlg6qyxjhwy"
+path="res://.godot/imported/cliff-neutral-jump.png-407209ce335cfa86e37082cb90938884.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/clint_run-Sheet.png"
-dest_files=["res://.godot/imported/clint_run-Sheet.png-ee051ef945855c4e49f082d551f4ed71.ctex"]
+source_file="res://Sprites/Sprite Sheets/cliff-neutral-jump.png"
+dest_files=["res://.godot/imported/cliff-neutral-jump.png-407209ce335cfa86e37082cb90938884.ctex"]
 
 [params]
 
