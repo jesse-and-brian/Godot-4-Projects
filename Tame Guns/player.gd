@@ -14,27 +14,27 @@ var canJump = true
 var isMoving = false
 var isJumping = false
 
-@onready var _animated_sprite = $AnimatedSprite2D
+@onready var state_machine = $AnimationTree["parameters/playback"]
 
-@export var fireRate = .3
+@export var fireRate = .4
 @export var jumpRate = .6
 
 func _process(_delta):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and canFire and is_on_floor(): # If the Cooldown for firing is up, fire if left mouse button has been clicked
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and canFire and is_on_floor() and !isMoving:
 		var b = bullet.instantiate() # This creates a copy of the scene definied in var bullet above and thus the script for the bullet
-		owner.add_child(b) # Make a child of root ("Owner")
+		owner.add_child(b)
 		b.transform = $shotSpawn.global_transform # Force the bullet to spawn at shotSpawn marker
 		canFire = false # Set ability to fire to false, so can't fire
 		await get_tree().create_timer(fireRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
 		canFire = true # Set fire back to true so can fire again
+		
+	sprite_animations() # This function handles all of the player animations
 
-#var velocity = Vector2.ZERO
 func _physics_process(delta):
 
 	velocity.x = 0
 	isMoving = false
-	print(isJumping)
-		
+	
 	if is_on_floor():
 		isJumping = false
 	
@@ -55,34 +55,13 @@ func _physics_process(delta):
 		canJump = false # Set ability to fire to false, so can't fire
 		await get_tree().create_timer(jumpRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
 		canJump = true # Set fire back to true so can fire again
-		
-
-
 	
 	if velocity.x == -65 or velocity.x == 65:
 		isMoving = true
 	
-	if velocity.x == -65:
-		_animated_sprite.flip_h = true
-	else:
-		_animated_sprite.flip_h = false
+	print("Moving: ", isMoving)
+	print("Jumping: ", isJumping)
 	
-	if !isMoving and !isJumping:
-		_animated_sprite.play("Idle")
-	
-	if isMoving and isJumping:
-		_animated_sprite.play("Jump")
-		
-	if !isMoving and isJumping:
-		_animated_sprite.play("Jump-n")
-	
-	if isMoving and !isJumping:
-		_animated_sprite.play("Run")
-
-
-	
-		
-		
 	move_and_slide() # Need this to move when two objects are colliding (The floor and player). See documentation
 	
 	if global_position.y > 150: # if you fall off the side of the level, it reloads the scene
@@ -90,4 +69,23 @@ func _physics_process(delta):
 	
 func game_over(): # Just reloads the screen on death
 	get_tree().reload_current_scene()
+	
+func sprite_animations():
+	
+	if !isMoving and !isJumping:
+		state_machine.travel("Idle")
+#
+	if isMoving and isJumping:
+		state_machine.travel("Jump")
+#
+	if !isMoving and isJumping:
+		state_machine.travel("Jump_n")
+#
+	if isMoving and !isJumping:
+		state_machine.travel("Run")
+		
+	if velocity.x == -65: # This flips the sprites if moving left
+		$AnimatedSprite2D.scale.x = -1
+	else: # Else set it back to default (1)
+		$AnimatedSprite2D.scale.x = 1
 	

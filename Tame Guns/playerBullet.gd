@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var speed = 5 												 # bullet speed multiplier
+@onready var speed = 2 												 # bullet speed multiplier
 @onready var playerMoving = get_node("../Player").isMoving			 # Is Player moving yes/no
 @onready var playerLocation = get_node("../Player").global_position  # Location of player on bullet creation
 @onready var playerVelocity = get_node("../Player").velocity
@@ -13,21 +13,30 @@ func _ready():
 	#print(target) # print location of Crosshair node at creation of bullet instance
 	
 func _process(delta):
-	pass
+	
+	var velocity = Vector2.ZERO
+	var speed = 3
+	
+#	var angle = get_angle_to(target)
+#	velocity.x = cos(angle)
+#	velocity.y = sin(angle)
+#	global_position += velocity * speed * delta
+	
+	global_position += global_position.direction_to(target) * speed
+	
+	#position = position.move_toward(target, speed)
+	#position += (target - playerLocation) * speed * delta   # Old Version of bullet behavior
 	#print(position.x)
+	$Sprite.scale += Vector2(-.1,-.1) * 8 * delta # Make bullets get smaller as they travel, but just the sprites. Collision stays big
+	if $Sprite.scale.x <= 0: # Destroy bullets when scale == 0
+		queue_free()
+	
 	
 func _physics_process(delta):
 	
-	var currentTargetPos = get_node("../Crosshair").global_position
-	var currentPlayerPos = get_node("../Player").global_position
-	
-	if playerMoving == false:
-		position = position.move_toward(target, speed)
-		#position += (target - playerLocation) * speed * delta   # Old Version of bullet behavior
-	
-	if playerMoving == true:
-		position = position.move_toward(target, speed)
-		#position += (target - playerLocation) * speed * delta
+	var currentTargetPos = get_node("../Crosshair").global_position # Constantly get an updated vector of the Crosshair's position
+	var currentPlayerPos = get_node("../Player").global_position    # Constantly get an updated vector of the Player's position
+
 		
 #		if target != get_node("../Crosshair").global_position and position.x > 0 and position <= ( target - Vector2(3,0) ):
 #			position += (get_node("../Crosshair").global_position - playerLocation) * speed * delta
@@ -38,9 +47,9 @@ func _physics_process(delta):
 #			#position = position.move_toward(get_node("../Crosshair").global_position, speed+20)
 	
 	#if position.distance_to(target) < 20 and 
-	if position.distance_to(currentTargetPos) <= 50 and target.distance_to(currentTargetPos) <= 200 and position != target and position != currentTargetPos:
-		#position = global_position.move_toward(currentTargetPos, speed+5)
-		position = position.lerp(currentTargetPos, .5)
+#	if position.distance_to(currentTargetPos) <= 50 and target.distance_to(currentTargetPos) <= 200 and position != target and position != currentTargetPos:
+#		#position = global_position.move_toward(currentTargetPos, speed+5)
+#		position = position.lerp(currentTargetPos, .5)
 	
 		
 		
@@ -52,12 +61,9 @@ func _physics_process(delta):
 #	if (playerLocation.y - target.y) < 50:
 #		position += (target - playerLocation) * closeSpeed  * delta
 	
-	scale += Vector2(-.1,-.1) * 9 * delta # Make bullets get smaller as they travel
-	
 	if global_position.y == target.y:
 		queue_free()
-	if scale.x <= 0:
-		queue_free()
+	
 	#print(global_position)
 		
 	await get_tree().create_timer(100).timeout # destroy bullet if a lot of time passes, just in case
