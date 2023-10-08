@@ -56,11 +56,15 @@ func _physics_process(delta):
 		await get_tree().create_timer(jumpRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
 		canJump = true # Set fire back to true so can fire again
 	
-	if velocity.x == -65 or velocity.x == 65:
+	if velocity.x != 0:
 		isMoving = true
 	
-	print("Moving: ", isMoving)
-	print("Jumping: ", isJumping)
+	print(velocity)
+	
+#	if isMoving:
+#		print("Moving")
+#	if isJumping:
+#		print("Jumping or Falling")
 	
 	move_and_slide() # Need this to move when two objects are colliding (The floor and player). See documentation
 	
@@ -86,6 +90,8 @@ func sprite_animations():
 		
 	if velocity.x == -65: # This flips the sprites if moving left
 		$AnimatedSprite2D.scale.x = -1
-	else: # Else set it back to default (1)
+#		$Body.position.x = $Body.position.x -5
+	if velocity.x > 0: # Else set it back to default (1)
 		$AnimatedSprite2D.scale.x = 1
+#		$Body.position.x = $Body.position.x + 5
 	

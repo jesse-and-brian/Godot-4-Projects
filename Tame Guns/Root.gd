@@ -7,14 +7,20 @@ func _ready():
 	pass # Replace with function body.
 
 func _unhandled_input(event):
+	
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().quit()
+			
+			
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_Q:
+			get_node("Player").game_over()
 
-func _physics_process(delta):
-	cameraPosition = $Player/Camera.get_target_position()
+func _physics_process(_delta):
+	pass
 	#print(cameraPosition)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(_delta):
+	cameraPosition = $Player/Camera.get_target_position()

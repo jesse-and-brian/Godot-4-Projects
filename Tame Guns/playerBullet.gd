@@ -1,11 +1,11 @@
 extends Area2D
 
-@onready var speed = 2 												 # bullet speed multiplier
+@onready var speed = 4 												 # bullet speed multiplier
 @onready var playerMoving = get_node("../Player").isMoving			 # Is Player moving yes/no
 @onready var playerLocation = get_node("../Player").global_position  # Location of player on bullet creation
 @onready var playerVelocity = get_node("../Player").velocity
 @onready var target = get_node("../Crosshair").global_position 		 # Snapshot of Target's Location upon firing
-@onready var cameraPosition = get_node("../").cameraPosition         # Camera's target position, in global coordinates on bullet creation
+#@onreadyd var cameraPosition = get_node("../").cameraPosition         # Camera's target position, in global coordinates on bullet creation
 
 
 func _ready():
@@ -14,28 +14,30 @@ func _ready():
 	
 func _process(delta):
 	
-	var velocity = Vector2.ZERO
-	var speed = 3
-	
+#	var velocity = Vector2.ZERO
 #	var angle = get_angle_to(target)
 #	velocity.x = cos(angle)
 #	velocity.y = sin(angle)
 #	global_position += velocity * speed * delta
 	
-	global_position += global_position.direction_to(target) * speed
+	if global_position.distance_to(target) > 5:
+		global_position += global_position.direction_to(target) * speed
+	if global_position.distance_to(target) <= 5:
+		global_position += target * 0
+		$Sprite.scale += Vector2(-.1,-.1) * 10 * delta # More aggressively shrink the bullet when it reaches the target
 	
 	#position = position.move_toward(target, speed)
 	#position += (target - playerLocation) * speed * delta   # Old Version of bullet behavior
 	#print(position.x)
-	$Sprite.scale += Vector2(-.1,-.1) * 8 * delta # Make bullets get smaller as they travel, but just the sprites. Collision stays big
+	$Sprite.scale += Vector2(-.1,-.1) * speed * delta # Make bullets get smaller as they travel, but just the sprites. Collision stays big
 	if $Sprite.scale.x <= 0: # Destroy bullets when scale == 0
 		queue_free()
 	
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	
-	var currentTargetPos = get_node("../Crosshair").global_position # Constantly get an updated vector of the Crosshair's position
-	var currentPlayerPos = get_node("../Player").global_position    # Constantly get an updated vector of the Player's position
+#	var currentTargetPos = get_node("../Crosshair").global_position # Constantly get an updated vector of the Crosshair's position
+#	var currentPlayerPos = get_node("../Player").global_position    # Constantly get an updated vector of the Player's position
 
 		
 #		if target != get_node("../Crosshair").global_position and position.x > 0 and position <= ( target - Vector2(3,0) ):
