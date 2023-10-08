@@ -1,7 +1,7 @@
 
 extends CharacterBody2D
 
-var moveSpeed : float = 65
+var moveSpeed : float = 85
 var jumpForce : float = 200
 var gravity : float = 900
 
@@ -59,8 +59,6 @@ func _physics_process(delta):
 	if velocity.x != 0:
 		isMoving = true
 	
-	print(velocity)
-	
 #	if isMoving:
 #		print("Moving")
 #	if isJumping:
@@ -88,7 +86,7 @@ func sprite_animations():
 	if isMoving and !isJumping:
 		state_machine.travel("Run")
 		
-	if velocity.x == -65: # This flips the sprites if moving left
+	if velocity.x <= 0: # This flips the sprites if moving left
 		$AnimatedSprite2D.scale.x = -1
 #		$Body.position.x = $Body.position.x -5
 	if velocity.x > 0: # Else set it back to default (1)

@@ -6,6 +6,8 @@ extends Area2D
 var startPos : Vector2
 var targetPos : Vector2
 
+var boom = preload ("res://explosion.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -30,4 +32,11 @@ func _on_body_entered(body):
 
 func _on_area_entered(area):
 	if area.is_in_group("playerBullet"):
+		var b = boom.instantiate() # Creates an instance of an explosion at the enemy
+		owner.add_child(b)
+		b.play("Boom")
+		b.position = position
 		queue_free()
+		
+		
+
