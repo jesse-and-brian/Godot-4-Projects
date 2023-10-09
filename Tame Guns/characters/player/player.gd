@@ -8,14 +8,16 @@ var gravity : float = 700
 var updateCrossHairPos : Vector2
 var characterVector : Vector2
 
-var bullet = preload ("res://playerbullet.tscn") # Preload the bullet scene so it can spawn
+var bullet = preload ("res://playerbullet.tscn")
+var laser = preload ("res://weapons/LaserBeam.tscn") # Preload the bullet scene so it can spawn
 var canFire = true
 var isMoving = false
 var isJumping = false
-var currentWeapon = "pistol"
+var currentWeapon = "laser"
 var weaponMode = "standard"
 
 @export var fireRate = .3
+@export var lzFireRate = 80
 
 func _process(_delta):
 	
@@ -71,9 +73,13 @@ func mouse_button_pressed(currentWeapon,weaponMode):
 		await get_tree().create_timer(fireRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
 		canFire = true # Set fire back to true so can fire again
 	
-	if(currentWeapon == "Lazer" && weaponMode):
-#		var z = Lazer.instantiate()
-#		owner.add_child(z)
+	if(currentWeapon == "laser" && weaponMode):
+		var z = laser.instantiate()
+		owner.add_child(z)
+		z.transform = $shotSpawn.global_transform # Force the bullet to spawn at shotSpawn marker
+		canFire = false # Set ability to fire to false, so can't fire
+		await get_tree().create_timer(lzFireRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
+		canFire = true # Set fire back to true so can fire again
 		
 		pass	
 	if(currentWeapon == "machineGun"):

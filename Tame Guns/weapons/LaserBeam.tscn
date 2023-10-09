@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk1xxjdlsbpmm"]
+
+[ext_resource type="Script" path="res://weapons/LaserBeam.gd" id="1_2i275"]
+
+[node name="Laser" type="RayCast2D"]
+position = Vector2(169, 64)
+script = ExtResource("1_2i275")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 80, 0)
+default_color = Color(0.776471, 0.878431, 0.996078, 1)
+joint_mode = 2
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(80, 0)

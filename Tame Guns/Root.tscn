@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://deixco0ui4uk7"]
+[gd_scene load_steps=21 format=3 uid="uid://deixco0ui4uk7"]
 
 [ext_resource type="Texture2D" uid="uid://biwond464pw3f" path="res://Sprites/Tiles/tiles_packed.png" id="1_d20yv"]
 [ext_resource type="Script" path="res://characters/player/player.gd" id="3_bbfcm"]
@@ -9,10 +9,11 @@
 [ext_resource type="Script" path="res://weapons/guns/pistols/MagnumPistol.gd" id="8_dp4c1"]
 [ext_resource type="Script" path="res://ControlGUI.gd" id="8_mc5rw"]
 [ext_resource type="PackedScene" uid="uid://d24rcpyuk1npp" path="res://playerbullet.tscn" id="8_xtrvn"]
+[ext_resource type="Script" path="res://weapons/sword.gd" id="9_e0m3b"]
 [ext_resource type="Script" path="res://Weapons.gd" id="9_elcgu"]
-[ext_resource type="Script" path="res://weapons/guns/Lazer.gd" id="11_ijttj"]
+[ext_resource type="Script" path="res://weapons/guns/pistols/Pistol.gd" id="11_6324e"]
+[ext_resource type="PackedScene" uid="uid://bk1xxjdlsbpmm" path="res://weapons/LaserBeam.tscn" id="11_dbxa1"]
 [ext_resource type="Script" path="res://MachineGun.gd" id="12_f2o21"]
-[ext_resource type="Script" path="res://sword.gd" id="14_f1qj2"]
 [ext_resource type="Script" path="res://characters/Health.gd" id="14_lrvw5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s7oei"]
@@ -593,20 +594,6 @@ texture_region_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_s7oei")
 
-[sub_resource type="GDScript" id="GDScript_ekh6y"]
-script/source = "extends Node2D
-class_name RocketLauncher
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_v4pcy"]
 animations = [{
 "frames": [{
@@ -623,6 +610,20 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kbxl0"]
 size = Vector2(14, 22)
+
+[sub_resource type="GDScript" id="GDScript_ekh6y"]
+script/source = "extends Node2D
+class_name RocketLauncher
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="Root" type="Node2D"]
 script = ExtResource("9_elcgu")
@@ -646,27 +647,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_mc5rw")
-
-[node name="GunWeapons" type="Node2D" parent="."]
-script = ExtResource("6_buawd")
-
-[node name="RocketLauncher" type="Node2D" parent="GunWeapons"]
-script = SubResource("GDScript_ekh6y")
-
-[node name="Pistol" type="Node2D" parent="GunWeapons"]
-script = ExtResource("8_dp4c1")
-
-[node name="MagnumPistol" type="Node2D" parent="GunWeapons/Pistol"]
-
-[node name="MachineGun" type="Node2D" parent="GunWeapons"]
-script = ExtResource("12_f2o21")
-
-[node name="MeleeWeapons" type="Node2D" parent="."]
-
-[node name="sword" type="Node2D" parent="MeleeWeapons"]
-script = ExtResource("14_f1qj2")
-
-[node name="knife" type="Node2D" parent="MeleeWeapons"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 visibility_layer = 17
@@ -705,7 +685,28 @@ drag_bottom_margin = 0.0
 [node name="Health" type="Node" parent="Player"]
 script = ExtResource("14_lrvw5")
 
-[node name="Lazer" type="RayCast2D" parent="."]
-script = ExtResource("11_ijttj")
+[node name="GunWeapons" type="Node2D" parent="Player"]
+position = Vector2(3, -18)
+script = ExtResource("6_buawd")
 
-[node name="Line2D" type="Line2D" parent="Lazer"]
+[node name="Laser" parent="Player/GunWeapons" instance=ExtResource("11_dbxa1")]
+
+[node name="RocketLauncher" type="Node2D" parent="Player/GunWeapons"]
+script = SubResource("GDScript_ekh6y")
+
+[node name="Pistol" type="Node2D" parent="Player/GunWeapons"]
+script = ExtResource("11_6324e")
+
+[node name="MagnumPistol" type="Node2D" parent="Player/GunWeapons/Pistol"]
+script = ExtResource("8_dp4c1")
+
+[node name="MachineGun" type="Node2D" parent="Player/GunWeapons"]
+script = ExtResource("12_f2o21")
+
+[node name="MeleeWeapons" type="Node2D" parent="Player"]
+position = Vector2(3, -18)
+
+[node name="sword" type="Node2D" parent="Player/MeleeWeapons"]
+script = ExtResource("9_e0m3b")
+
+[node name="knife" type="Node2D" parent="Player/MeleeWeapons"]
