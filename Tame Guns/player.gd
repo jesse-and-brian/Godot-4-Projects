@@ -9,15 +9,23 @@ var updateCrossHairPos : Vector2
 var characterVector : Vector2
 
 var bullet = preload ("res://playerbullet.tscn") # Preload the bullet scene so it can spawn
+
 var canFire = true
 var canJump = true
 var isMoving = false
 var isJumping = false
+var aimingMid = false
+var aimingHigh = false
 
 @onready var state_machine = $AnimationTree["parameters/playback"]
+@onready var animation_tree : AnimationTree = $AnimationTree
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 @export var fireRate = .4
 @export var jumpRate = .6
+
+func _ready():
+	animation_tree.active = true
 
 func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and canFire and is_on_floor() and !isMoving:
@@ -49,20 +57,15 @@ func _physics_process(delta):
 
 	if Input.is_key_pressed(KEY_D):
 		velocity.x += moveSpeed
-		
+	
+	if velocity.x != 0:
+		isMoving = true
+	
 	if Input.is_key_pressed(KEY_SPACE) and is_on_floor() and canJump:
 		velocity.y = -jumpForce
 		canJump = false # Set ability to fire to false, so can't fire
 		await get_tree().create_timer(jumpRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
 		canJump = true # Set fire back to true so can fire again
-	
-	if velocity.x != 0:
-		isMoving = true
-	
-#	if isMoving:
-#		print("Moving")
-#	if isJumping:
-#		print("Jumping or Falling")
 	
 	move_and_slide() # Need this to move when two objects are colliding (The floor and player). See documentation
 	
@@ -74,7 +77,75 @@ func game_over(): # Just reloads the screen on death
 	
 func sprite_animations():
 	
-	if !isMoving and !isJumping:
+	var currentTargetPos = get_node("../Crosshair").global_position # Grab the current position of the Crosshair
+	var distancePlayerToTarget = abs(global_position - currentTargetPos) # This shows the distance of the target from the player
+	var animFlipChecker = currentTargetPos - global_position # This math tells me if it's to the left or right of the player
+	
+#	print("Med: ", aimingMid)
+#	print("High: ", aimingHigh)
+	print(distancePlayerToTarget)
+	#print("Moving: ", isMoving)
+	#print("Jumping: ", isJumping)
+	
+	if animFlipChecker.x < 0 and distancePlayerToTarget.x >= 15: # Normal orientation
+		$AnimatedSprite2D.flip_h = 0
+		if aimingMid:
+			$shotSpawn.position = Vector2(-14.65,-16.805)
+		if aimingHigh:
+			$shotSpawn.position = Vector2(-14.65,-20.805)
+	else: # If we're not aiming, change the spawn point for the bullets in the middle of character (default)
+		$shotSpawn.position = Vector2(-0.87,-16.295)
+		aimingHigh = false
+		aimingMid = false
+		
+	if animFlipChecker.x >= 0 and distancePlayerToTarget.x >= 15: # Flip the sprite if we're aiming the other way
+		$AnimatedSprite2D.flip_h = 1
+		if aimingMid:
+			$shotSpawn.position = Vector2(14.65,-16.805)
+		if aimingHigh:
+			$shotSpawn.position = Vector2(14.65,-20.805)
+	else: # If we're not aiming, change the spawn point for the bullets in the middle of character (default)
+		$shotSpawn.position = Vector2(-0.87,-16.295)
+		aimingHigh = false
+		aimingMid = false
+		
+	if velocity.x < 0: # This flips the sprites if moving left
+		$AnimatedSprite2D.flip_h = 1
+	if velocity.x > 0: # Set it back
+		$AnimatedSprite2D.flip_h = 0
+
+
+	if !isMoving and !isJumping and distancePlayerToTarget.x > 15 and distancePlayerToTarget.x < 65 and distancePlayerToTarget.y <= 85: #aiming mid and low
+		aimingMid = true
+		aimingHigh = false
+		state_machine.travel("Aiming-Mid-Slight")
+
+	if !isMoving and !isJumping and distancePlayerToTarget.x >= 65 and distancePlayerToTarget.x < 125 and distancePlayerToTarget.y <= 85: #aiming mid and low
+		aimingMid = true
+		aimingHigh = false
+		state_machine.travel("Aiming-Mid-Medium")
+
+	if !isMoving and !isJumping and distancePlayerToTarget.x >= 125 and distancePlayerToTarget.y <= 85: #aiming mid and low
+		aimingMid = true
+		aimingHigh = false
+		state_machine.travel("Aiming-Mid-Full")
+
+	if !isMoving and !isJumping and distancePlayerToTarget.x >= 15 and distancePlayerToTarget.x < 65 and distancePlayerToTarget.y >= 85: #aiming mid and low
+		aimingMid = false
+		aimingHigh = true
+		state_machine.travel("Aiming-Up-Slight")
+
+	if !isMoving and !isJumping and distancePlayerToTarget.x >= 65 and distancePlayerToTarget.x < 125 and distancePlayerToTarget.y >= 85: #aiming mid and low
+		aimingMid = false
+		aimingHigh = true
+		state_machine.travel("Aiming-Up-Medium")
+		
+	if !isMoving and !isJumping and distancePlayerToTarget.x >= 125 and distancePlayerToTarget.y >= 85: #aiming mid and low
+		aimingMid = false
+		aimingHigh = true
+		state_machine.travel("Aiming-Up-Full")
+
+	if !isMoving and !isJumping and abs(global_position.x - currentTargetPos.x)<= 50:
 		state_machine.travel("Idle")
 #
 	if isMoving and isJumping:
@@ -86,10 +157,8 @@ func sprite_animations():
 	if isMoving and !isJumping:
 		state_machine.travel("Run")
 		
-	if velocity.x <= 0: # This flips the sprites if moving left
-		$AnimatedSprite2D.scale.x = -1
-#		$Body.position.x = $Body.position.x -5
-	if velocity.x > 0: # Else set it back to default (1)
-		$AnimatedSprite2D.scale.x = 1
-#		$Body.position.x = $Body.position.x + 5
-	
+		
+func aiming_close_mid():
+		#animation_player.pause()
+		#call_deferred()
+		print("Boop")

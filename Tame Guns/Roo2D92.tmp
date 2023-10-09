@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://deixco0ui4uk7"]
+[gd_scene load_steps=112 format=3 uid="uid://deixco0ui4uk7"]
 
 [ext_resource type="Script" path="res://Root.gd" id="1_58q0u"]
 [ext_resource type="Script" path="res://player.gd" id="2_faqox"]
@@ -24,32 +24,6 @@ size = Vector2(30, 2.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nrgn"]
 size = Vector2(20, 58)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ni42p"]
-animation = &"Look-Full-Mid"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rb18a"]
-animation = &"Look-Medium-Mid"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t2wgy"]
-animation = &"Look-Full-Mid"
-play_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vk81j"]
-animation = &"Look-Slight-Mid"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aehul"]
-animation = &"Look-Up-Full"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jkap7"]
-animation = &"Look-Up-Medium"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mlkop"]
-animation = &"Look-Full-Up"
-play_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jvh0"]
-animation = &"Look-Up-Slight"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_euunk"]
 animation = &"Idle"
@@ -79,6 +53,12 @@ animation = &"Jump"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mpts4"]
 animation = &"Jump_n"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ni42p"]
+animation = &"Look-Full-Mid"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a8lxb"]
+animation = &"Look-Full-Up"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sdxfn"]
 animation = &"Run"
 
@@ -104,6 +84,22 @@ blend_point_3/pos = Vector2(0, -1)
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a3aya"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2spd6"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wa422"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b87g3"]
+advance_mode = 2
+advance_condition = &"is_jumping_n"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_37yrb"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o5162"]
 advance_mode = 2
 advance_condition = &"is_moving"
@@ -124,39 +120,81 @@ advance_condition = &"is_jumping"
 advance_mode = 2
 advance_condition = &"is_jumping_n"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6evq1"]
+advance_mode = 2
+advance_condition = &"is_aiming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sddur"]
+advance_mode = 2
+advance_condition = &"is_not_aiming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x0vd2"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s73ft"]
+advance_mode = 2
+advance_condition = &"is_aiming"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w0sf3"]
 advance_mode = 2
 advance_condition = &"is_jumping_n"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x5tct"]
+advance_mode = 2
+advance_condition = &"is_jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oaaf6"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fuh25"]
+advance_condition = &"is_jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d8yfr"]
+advance_condition = &"is_jumping_n"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ocrvv"]
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qpdkq"]
+advance_condition = &"is_aiming_up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qn76t"]
+advance_condition = &"is_not_aiming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_10xix"]
+advance_condition = &"is_aiming_up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jvlpb"]
+advance_condition = &"is_aiming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7od3p"]
+advance_condition = &"is_aiming_up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hwert"]
+advance_condition = &"is_jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gscit"]
+advance_condition = &"is_jumping_n"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m2lk3"]
-states/Aiming-Mid-Full/node = SubResource("AnimationNodeAnimation_ni42p")
-states/Aiming-Mid-Full/position = Vector2(-670.763, 91.9296)
-states/Aiming-Mid-Medium/node = SubResource("AnimationNodeAnimation_rb18a")
-states/Aiming-Mid-Medium/position = Vector2(-658.763, 35.9296)
-states/Aiming-Mid-Reverse/node = SubResource("AnimationNodeAnimation_t2wgy")
-states/Aiming-Mid-Reverse/position = Vector2(-694.763, -156.07)
-states/Aiming-Mid-Slight/node = SubResource("AnimationNodeAnimation_vk81j")
-states/Aiming-Mid-Slight/position = Vector2(-670.763, -20.0704)
-states/Aiming-Up-Full/node = SubResource("AnimationNodeAnimation_aehul")
-states/Aiming-Up-Full/position = Vector2(-912, 91.9296)
-states/Aiming-Up-Medium/node = SubResource("AnimationNodeAnimation_jkap7")
-states/Aiming-Up-Medium/position = Vector2(-893.763, 35.9296)
-states/Aiming-Up-Reverse/node = SubResource("AnimationNodeAnimation_mlkop")
-states/Aiming-Up-Reverse/position = Vector2(-912, -156.07)
-states/Aiming-Up-Slight/node = SubResource("AnimationNodeAnimation_7jvh0")
-states/Aiming-Up-Slight/position = Vector2(-900.763, -20.0704)
-states/End/position = Vector2(-1144, -231.846)
+states/End/position = Vector2(-296, 53.1539)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_8w3k2")
-states/Idle/position = Vector2(-639, -261)
+states/Idle/position = Vector2(-16.7631, 199)
 states/Jump/node = SubResource("AnimationNodeAnimation_683d3")
-states/Jump/position = Vector2(172.237, -451)
+states/Jump/position = Vector2(700.237, -43)
 states/Jump_n/node = SubResource("AnimationNodeAnimation_mpts4")
-states/Jump_n/position = Vector2(485.237, -256)
+states/Jump_n/position = Vector2(134.237, -43)
+states/Look-Full-Mid/node = SubResource("AnimationNodeAnimation_ni42p")
+states/Look-Full-Mid/position = Vector2(401.237, 555.154)
+states/Look-Full-Up/node = SubResource("AnimationNodeAnimation_a8lxb")
+states/Look-Full-Up/position = Vector2(126.237, 555.154)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_ky0hv")
-states/Run/position = Vector2(184.237, 187)
-states/Start/position = Vector2(-828, -261)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a3aya"), "Jump_n", "Run", SubResource("AnimationNodeStateMachineTransition_o5162"), "Jump_n", "Jump", SubResource("AnimationNodeStateMachineTransition_ixmnr"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_sv70g"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_seujs"), "Jump", "Jump_n", SubResource("AnimationNodeStateMachineTransition_1ukv8"), "Run", "Jump_n", SubResource("AnimationNodeStateMachineTransition_w0sf3")]
-graph_offset = Vector2(-1238.76, -295.07)
+states/Run/position = Vector2(700.237, 199)
+states/Start/position = Vector2(-296, 199)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a3aya"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_2spd6"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_wa422"), "Idle", "Jump_n", SubResource("AnimationNodeStateMachineTransition_b87g3"), "Jump_n", "Idle", SubResource("AnimationNodeStateMachineTransition_37yrb"), "Jump_n", "Run", SubResource("AnimationNodeStateMachineTransition_o5162"), "Jump_n", "Jump", SubResource("AnimationNodeStateMachineTransition_ixmnr"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_sv70g"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_seujs"), "Jump", "Jump_n", SubResource("AnimationNodeStateMachineTransition_1ukv8"), "Idle", "Look-Full-Mid", SubResource("AnimationNodeStateMachineTransition_6evq1"), "Look-Full-Mid", "Idle", SubResource("AnimationNodeStateMachineTransition_sddur"), "Look-Full-Mid", "Run", SubResource("AnimationNodeStateMachineTransition_x0vd2"), "Run", "Look-Full-Mid", SubResource("AnimationNodeStateMachineTransition_s73ft"), "Run", "Jump_n", SubResource("AnimationNodeStateMachineTransition_w0sf3"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_x5tct"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_oaaf6"), "Look-Full-Mid", "Jump", SubResource("AnimationNodeStateMachineTransition_fuh25"), "Look-Full-Mid", "Jump_n", SubResource("AnimationNodeStateMachineTransition_d8yfr"), "Look-Full-Up", "Run", SubResource("AnimationNodeStateMachineTransition_ocrvv"), "Run", "Look-Full-Up", SubResource("AnimationNodeStateMachineTransition_qpdkq"), "Look-Full-Up", "Idle", SubResource("AnimationNodeStateMachineTransition_qn76t"), "Idle", "Look-Full-Up", SubResource("AnimationNodeStateMachineTransition_10xix"), "Look-Full-Up", "Look-Full-Mid", SubResource("AnimationNodeStateMachineTransition_jvlpb"), "Look-Full-Mid", "Look-Full-Up", SubResource("AnimationNodeStateMachineTransition_7od3p"), "Look-Full-Up", "Jump", SubResource("AnimationNodeStateMachineTransition_hwert"), "Look-Full-Up", "Jump_n", SubResource("AnimationNodeStateMachineTransition_gscit")]
+graph_offset = Vector2(-552.763, 231.93)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_257qc"]
 atlas = ExtResource("4_flrac")
@@ -665,7 +703,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_b6apr"]
 resource_name = "Look-Slight-Mid"
-length = 0.0571457
+length = 0.400003
 step = 0.0285714
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -686,7 +724,7 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -694,7 +732,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_sf22k"]
 resource_name = "Look-Full-Mid"
-length = 0.114289
+length = 0.685717
 step = 0.0285714
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -715,29 +753,15 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143, 0.114286, 0.142857, 0.171429, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 5, 6, 7]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.114286),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"aiming_close_mid"
-}]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_k3lph"]
 resource_name = "Look-Medium-Mid"
-length = 0.114289
+length = 0.54286
 step = 0.0285714
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -758,44 +782,15 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0857143, 0.171429, 0.257143, 0.342857, 0.428571),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_h7vhe"]
-resource_name = "Look-Up-Medium"
-length = 0.114289
-step = 0.0285714
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Aim.shoot"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_br4ov"]
-resource_name = "Look-Up-Full"
-length = 0.114289
+resource_name = "Look-Full-Up"
+length = 2.40001
 step = 0.0285714
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -816,39 +811,10 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143, 0.114286, 0.142857, 0.171429, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_6hn6k"]
-resource_name = "Look-Up-Slight"
-length = 0.114289
-step = 0.0285714
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Aim.shoot"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0285714, 0.0571429, 0.0857143),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5lnol"]
@@ -857,11 +823,9 @@ _data = {
 "Jump": SubResource("Animation_8yrb3"),
 "Jump_n": SubResource("Animation_7vsa1"),
 "Look-Full-Mid": SubResource("Animation_sf22k"),
+"Look-Full-Up": SubResource("Animation_br4ov"),
 "Look-Medium-Mid": SubResource("Animation_k3lph"),
 "Look-Slight-Mid": SubResource("Animation_b6apr"),
-"Look-Up-Full": SubResource("Animation_br4ov"),
-"Look-Up-Medium": SubResource("Animation_h7vhe"),
-"Look-Up-Slight": SubResource("Animation_6hn6k"),
 "RESET": SubResource("Animation_mo4xu"),
 "Run": SubResource("Animation_vupox")
 }
@@ -975,11 +939,13 @@ drag_bottom_margin = 0.5
 [node name="AnimationTree" type="AnimationTree" parent="Player"]
 tree_root = SubResource("AnimationNodeStateMachine_m2lk3")
 anim_player = NodePath("../AnimationPlayer")
-active = true
+parameters/conditions/is_aiming = false
+parameters/conditions/is_aiming_up = false
 parameters/conditions/is_idle = false
 parameters/conditions/is_jumping = false
 parameters/conditions/is_jumping_n = false
 parameters/conditions/is_moving = false
+parameters/conditions/is_not_aiming = false
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
