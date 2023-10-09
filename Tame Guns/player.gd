@@ -83,31 +83,25 @@ func sprite_animations():
 	
 #	print("Med: ", aimingMid)
 #	print("High: ", aimingHigh)
-	print(distancePlayerToTarget)
+	print($shotSpawn.position)
 	#print("Moving: ", isMoving)
 	#print("Jumping: ", isJumping)
 	
-	if animFlipChecker.x < 0 and distancePlayerToTarget.x >= 15: # Normal orientation
+	if animFlipChecker.x < 0 and distancePlayerToTarget.x > 15: # Normal orientation
 		$AnimatedSprite2D.flip_h = 0
 		if aimingMid:
 			$shotSpawn.position = Vector2(-14.65,-16.805)
 		if aimingHigh:
 			$shotSpawn.position = Vector2(-14.65,-20.805)
-	else: # If we're not aiming, change the spawn point for the bullets in the middle of character (default)
-		$shotSpawn.position = Vector2(-0.87,-16.295)
-		aimingHigh = false
-		aimingMid = false
 		
-	if animFlipChecker.x >= 0 and distancePlayerToTarget.x >= 15: # Flip the sprite if we're aiming the other way
+	if animFlipChecker.x >= 0 and distancePlayerToTarget.x > 15: # Flip the sprite if we're aiming the other way
 		$AnimatedSprite2D.flip_h = 1
 		if aimingMid:
 			$shotSpawn.position = Vector2(14.65,-16.805)
 		if aimingHigh:
 			$shotSpawn.position = Vector2(14.65,-20.805)
-	else: # If we're not aiming, change the spawn point for the bullets in the middle of character (default)
-		$shotSpawn.position = Vector2(-0.87,-16.295)
-		aimingHigh = false
-		aimingMid = false
+			
+
 		
 	if velocity.x < 0: # This flips the sprites if moving left
 		$AnimatedSprite2D.flip_h = 1
@@ -145,8 +139,11 @@ func sprite_animations():
 		aimingHigh = true
 		state_machine.travel("Aiming-Up-Full")
 
-	if !isMoving and !isJumping and abs(global_position.x - currentTargetPos.x)<= 50:
+	if !isMoving and !isJumping and abs(global_position.x - currentTargetPos.x) < 15:
 		state_machine.travel("Idle")
+		aimingHigh = false
+		aimingMid = false
+		$shotSpawn.position = Vector2(-0.87,-16.295)
 #
 	if isMoving and isJumping:
 		state_machine.travel("Jump")

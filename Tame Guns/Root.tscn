@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://deixco0ui4uk7"]
+[gd_scene load_steps=95 format=3 uid="uid://deixco0ui4uk7"]
 
 [ext_resource type="Script" path="res://Root.gd" id="1_58q0u"]
 [ext_resource type="Script" path="res://player.gd" id="2_faqox"]
@@ -51,27 +51,8 @@ play_mode = 1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jvh0"]
 animation = &"Look-Up-Slight"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_euunk"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6e28j"]
 animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iqcab"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xqem0"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0t0rw"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_8w3k2"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_euunk")
-blend_point_0/pos = Vector2(-1.00241, -0.00827586)
-blend_point_1/node = SubResource("AnimationNodeAnimation_iqcab")
-blend_point_1/pos = Vector2(0, 1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_xqem0")
-blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_0t0rw")
-blend_point_3/pos = Vector2(0, -1)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_683d3"]
 animation = &"Jump"
@@ -100,9 +81,6 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_wowkd")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_qc0gw")
 blend_point_3/pos = Vector2(0, -1)
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a3aya"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o5162"]
 advance_mode = 2
@@ -136,7 +114,7 @@ states/Aiming-Mid-Medium/position = Vector2(-658.763, 35.9296)
 states/Aiming-Mid-Reverse/node = SubResource("AnimationNodeAnimation_t2wgy")
 states/Aiming-Mid-Reverse/position = Vector2(-694.763, -156.07)
 states/Aiming-Mid-Slight/node = SubResource("AnimationNodeAnimation_vk81j")
-states/Aiming-Mid-Slight/position = Vector2(-670.763, -20.0704)
+states/Aiming-Mid-Slight/position = Vector2(-670.763, -47.0704)
 states/Aiming-Up-Full/node = SubResource("AnimationNodeAnimation_aehul")
 states/Aiming-Up-Full/position = Vector2(-912, 91.9296)
 states/Aiming-Up-Medium/node = SubResource("AnimationNodeAnimation_jkap7")
@@ -146,8 +124,8 @@ states/Aiming-Up-Reverse/position = Vector2(-912, -156.07)
 states/Aiming-Up-Slight/node = SubResource("AnimationNodeAnimation_7jvh0")
 states/Aiming-Up-Slight/position = Vector2(-900.763, -20.0704)
 states/End/position = Vector2(-1144, -231.846)
-states/Idle/node = SubResource("AnimationNodeBlendSpace2D_8w3k2")
-states/Idle/position = Vector2(-639, -261)
+states/Idle/node = SubResource("AnimationNodeAnimation_6e28j")
+states/Idle/position = Vector2(-678.763, -261)
 states/Jump/node = SubResource("AnimationNodeAnimation_683d3")
 states/Jump/position = Vector2(172.237, -451)
 states/Jump_n/node = SubResource("AnimationNodeAnimation_mpts4")
@@ -155,8 +133,8 @@ states/Jump_n/position = Vector2(485.237, -256)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_ky0hv")
 states/Run/position = Vector2(184.237, 187)
 states/Start/position = Vector2(-828, -261)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a3aya"), "Jump_n", "Run", SubResource("AnimationNodeStateMachineTransition_o5162"), "Jump_n", "Jump", SubResource("AnimationNodeStateMachineTransition_ixmnr"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_sv70g"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_seujs"), "Jump", "Jump_n", SubResource("AnimationNodeStateMachineTransition_1ukv8"), "Run", "Jump_n", SubResource("AnimationNodeStateMachineTransition_w0sf3")]
-graph_offset = Vector2(-1238.76, -295.07)
+transitions = ["Jump_n", "Run", SubResource("AnimationNodeStateMachineTransition_o5162"), "Jump_n", "Jump", SubResource("AnimationNodeStateMachineTransition_ixmnr"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_sv70g"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_seujs"), "Jump", "Jump_n", SubResource("AnimationNodeStateMachineTransition_1ukv8"), "Run", "Jump_n", SubResource("AnimationNodeStateMachineTransition_w0sf3")]
+graph_offset = Vector2(-1241.76, -368.07)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_257qc"]
 atlas = ExtResource("4_flrac")
@@ -976,11 +954,9 @@ drag_bottom_margin = 0.5
 tree_root = SubResource("AnimationNodeStateMachine_m2lk3")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/conditions/is_idle = false
 parameters/conditions/is_jumping = false
 parameters/conditions/is_jumping_n = false
 parameters/conditions/is_moving = false
-parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
