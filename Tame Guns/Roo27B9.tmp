@@ -984,8 +984,7 @@ libraries = {
 
 [node name="FootSteps" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource("12_nafuj")
-volume_db = -18.95
-pitch_scale = 1.12
+volume_db = -1.849
 
 [node name="Crosshair" parent="." instance=ExtResource("5_glxh8")]
 

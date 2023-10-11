@@ -109,6 +109,13 @@ func sprite_animations():
 		$AnimatedSprite2D.flip_h = 0
 
 
+	if isMoving and $FootSteps.get_playback_position() == 0:
+		$FootSteps.play()
+		print( $FootSteps.get_playback_position() )
+	if !isMoving:
+		$FootSteps.stop()
+		
+
 	if !isMoving and !isJumping and distancePlayerToTarget.x > 15 and distancePlayerToTarget.x < 65 and distancePlayerToTarget.y <= 85: #aiming mid and low
 		aimingMid = true
 		aimingHigh = false
@@ -153,6 +160,10 @@ func sprite_animations():
 #
 	if isMoving and !isJumping:
 		state_machine.travel("Run")
+#		print($FootSteps.get_playback_position())
+#		if $FootSteps.get_playback_position() == 0:
+			
+		
 		
 		
 func aiming_close_mid():
