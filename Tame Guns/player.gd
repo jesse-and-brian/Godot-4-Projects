@@ -81,11 +81,8 @@ func sprite_animations():
 	var distancePlayerToTarget = abs(global_position - currentTargetPos) # This shows the distance of the target from the player
 	var animFlipChecker = currentTargetPos - global_position # This math tells me if it's to the left or right of the player
 	
-#	print("Med: ", aimingMid)
-#	print("High: ", aimingHigh)
-	print($shotSpawn.position)
-	#print("Moving: ", isMoving)
-	#print("Jumping: ", isJumping)
+#	print("Moving: ", isMoving)
+#	print("Jumping: ", isJumping)
 	
 	if animFlipChecker.x < 0 and distancePlayerToTarget.x > 15: # Normal orientation
 		$AnimatedSprite2D.flip_h = 0
@@ -102,17 +99,17 @@ func sprite_animations():
 			$shotSpawn.position = Vector2(14.65,-20.805)
 			
 
-		
 	if velocity.x < 0: # This flips the sprites if moving left
 		$AnimatedSprite2D.flip_h = 1
 	if velocity.x > 0: # Set it back
 		$AnimatedSprite2D.flip_h = 0
 
-
-	if isMoving and $FootSteps.get_playback_position() == 0:
+# Sounds attatched to the player
+	if isMoving and !isJumping and $FootSteps.get_playback_position() == 0:
 		$FootSteps.play()
-		print( $FootSteps.get_playback_position() )
 	if !isMoving:
+		$FootSteps.stop()
+	if isJumping:
 		$FootSteps.stop()
 		
 
@@ -166,7 +163,8 @@ func sprite_animations():
 		
 		
 		
-func aiming_close_mid():
+func aiming_close_mid(): # Leave this in for now, I have it hooked up to an aiming animation
+	pass
 		#animation_player.pause()
 		#call_deferred()
-		print("Boop")
+		#print("Work in progress, leave in")
