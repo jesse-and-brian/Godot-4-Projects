@@ -35,10 +35,11 @@ func _process(delta):
 	
 	
 func _physics_process(_delta):
-	
-#	var currentTargetPos = get_node("../Crosshair").global_position # Constantly get an updated vector of the Crosshair's position
-#	var currentPlayerPos = get_node("../Player").global_position    # Constantly get an updated vector of the Player's position
-
+	if global_position.y == target.y:
+		queue_free()
+		
+	await get_tree().create_timer(100).timeout # destroy bullet if a lot of time passes, just in case
+	queue_free()
 		
 #		if target != get_node("../Crosshair").global_position and position.x > 0 and position <= ( target - Vector2(3,0) ):
 #			position += (get_node("../Crosshair").global_position - playerLocation) * speed * delta
@@ -63,12 +64,7 @@ func _physics_process(_delta):
 #	if (playerLocation.y - target.y) < 50:
 #		position += (target - playerLocation) * closeSpeed  * delta
 	
-	if global_position.y == target.y:
-		queue_free()
-	
-	#print(global_position)
-		
-	await get_tree().create_timer(100).timeout # destroy bullet if a lot of time passes, just in case
-	queue_free()
-	
 
+func _on_area_entered(area): # Destroy bullet on impact with enemy
+	if area.is_in_group("Enemy"):
+		queue_free()

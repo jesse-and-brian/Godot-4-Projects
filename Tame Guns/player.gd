@@ -49,7 +49,7 @@ func _physics_process(delta):
 	if !is_on_floor():
 		isJumping = true
 	
-	if not is_on_floor():
+	if !is_on_floor():
 		velocity.y += gravity * delta
 		
 	if Input.is_key_pressed(KEY_A):
