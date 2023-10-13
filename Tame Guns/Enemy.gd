@@ -25,7 +25,6 @@ func _process(_delta):
 	if canFire and firstBulletDelay >= 150:
 		
 		var eb = enemyBullet.instantiate() # This creates a copy of the scene definied in var bullet above and thus the script for the bullet
-		eb.set_owner(get_node("../EnemySpwaner"))
 		add_sibling(eb)
 		eb.transform = $shotSpawn.global_transform # Force the bullet to spawn at shotSpawn marker
 		canFire = false # Set ability to fire to false, so can't fire
@@ -42,7 +41,7 @@ func _process(_delta):
 	if secondMovement:
 		#global_position = global_position.move_toward(currentPlayerPos, moveSpeed) # move to player's new location
 		global_position = global_position.move_toward(startPos, moveSpeed)
-		print("Second Movement Activated")
+#		print("Second Movement Activated")
 	
 	if global_position.distance_to(startPos) < 1:
 		secondMovement = false
@@ -61,8 +60,8 @@ func _process(_delta):
 func _on_area_entered(area):
 	if area.is_in_group("playerBullet"):
 		var bm = boom.instantiate() # Creates an instance of an explosion at the enemy
-		bm.set_owner(get_node("../EnemySpwaner"))
 		add_sibling(bm)
+		get_node("../").add_score(1)
 		bm.play("Boom")
 		bm.global_position = global_position
 		queue_free()

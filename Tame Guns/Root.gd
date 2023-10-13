@@ -1,6 +1,7 @@
 extends Node2D
 
 var cameraPosition :  Vector2
+var score : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +22,12 @@ func _physics_process(_delta):
 	pass
 	#print(cameraPosition)
 
+func add_score (amount):
+	score += amount
+	get_node("UI/scoreText").text = str("Score: ", score)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	cameraPosition = $Player/Camera.get_target_position()
+	
+	print(score)

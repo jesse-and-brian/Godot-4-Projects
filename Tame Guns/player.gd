@@ -159,10 +159,7 @@ func sprite_animations():
 		state_machine.travel("Run")
 #		print($FootSteps.get_playback_position())
 #		if $FootSteps.get_playback_position() == 0:
-			
-		
-		
-		
+
 func aiming_close_mid(): # Leave this in for now, I have it hooked up to an aiming animation
 	pass
 		#animation_player.pause()
