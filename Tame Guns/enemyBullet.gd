@@ -1,7 +1,6 @@
 extends Area2D
 
-@onready var speed = 4 												 # bullet speed multiplier
-@onready var playerMoving = get_node("../Player").isMoving			 # Is Player moving yes/no
+@onready var speed = 1 												 # bullet speed multiplier
 @onready var playerLocation = get_node("../Player").global_position  # Location of player on bullet creation
 @onready var playerVelocity = get_node("../Player").velocity
 @onready var target = get_node("../Crosshair").global_position 		 # Snapshot of Target's Location upon firing
@@ -20,9 +19,10 @@ func _process(delta):
 #	velocity.y = sin(angle)
 #	global_position += velocity * speed * delta
 	
-	if global_position.distance_to(target) > 5:
-		global_position += global_position.direction_to(target) * speed
-	if global_position.distance_to(target) <= 5:
+#	if global_position.distance_to(playerLocation) > 5:
+	global_position += global_position.direction_to(playerLocation) * speed
+	
+	if global_position.distance_to(playerLocation) <= 5:
 		global_position += target * 0
 		$Sprite.scale += Vector2(-.1,-.1) * 10 * delta # More aggressively shrink the bullet when it reaches the target
 	
@@ -32,8 +32,7 @@ func _process(delta):
 	$Sprite.scale += Vector2(-.1,-.1) * speed * delta # Make bullets get smaller as they travel, but just the sprites. Collision stays big
 	if $Sprite.scale.x <= 0: # Destroy bullets when scale == 0
 		queue_free()
-	
-	
+		
 func _physics_process(_delta):
 	if global_position.y == target.y:
 		queue_free()
@@ -65,8 +64,12 @@ func _physics_process(_delta):
 #		position += (target - playerLocation) * closeSpeed  * delta
 	
 
+
 func _on_area_entered(area): # Destroy bullet on impact with enemy
-	if area.is_in_group("Enemy"):
+	if area.is_in_group("playerBullet"):
 		queue_free()
-	if area.is_in_group("enemyBullet"):
-		queue_free()
+		
+func _on_body_entered(body):
+	if body.is_in_group("Player"):
+		body.game_over()
+		print("trigger")
