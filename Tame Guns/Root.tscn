@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://deixco0ui4uk7"]
+[gd_scene load_steps=100 format=3 uid="uid://deixco0ui4uk7"]
 
 [ext_resource type="Script" path="res://Root.gd" id="1_58q0u"]
 [ext_resource type="AudioStream" uid="uid://cp3nd2sauq7bq" path="res://Sound/Music/04 Carson City.mp3" id="2_7cxmc"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bty3rufsm6foo" path="res://Sprites/Sprite Sheets/clint-jump.png" id="7_egrei"]
 [ext_resource type="Texture2D" uid="uid://ckvlvwf7kagwi" path="res://Sprites/Sprite Sheets/clint-dodge.png" id="9_tpnc7"]
 [ext_resource type="AudioStream" uid="uid://cbdd3b46onr4l" path="res://Sound/Player/FOOTSTEPS (A) Walking Loop 01.wav" id="12_nafuj"]
+[ext_resource type="AudioStream" uid="uid://cfro27mtmgne" path="res://Sound/Weapons/metal_slug_heavy_mg.mp3" id="14_h5ehi"]
 
 [sub_resource type="SystemFont" id="SystemFont_yofn4"]
 
@@ -1032,5 +1033,11 @@ libraries = {
 stream = ExtResource("12_nafuj")
 volume_db = -18.95
 pitch_scale = 1.12
+
+[node name="Weapon_Pick_Up_Sounds" type="Node" parent="Player"]
+
+[node name="HeavyMachineGun" type="AudioStreamPlayer" parent="Player/Weapon_Pick_Up_Sounds"]
+stream = ExtResource("14_h5ehi")
+volume_db = -10.169
 
 [node name="Crosshair" parent="." instance=ExtResource("5_glxh8")]

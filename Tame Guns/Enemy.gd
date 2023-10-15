@@ -12,8 +12,9 @@ var secondMovement : bool
 var canFire = true
 var firstBulletDelay : int = 0
 
-var boom = preload ("res://explosion.tscn")
-var enemyBullet = preload ("res://enemybullet.tscn") # Preload the bullet scene so it can spawn
+var boom = preload ("res://explosion.tscn")					# Enemy Explosion animation and sound
+var enemyBullet = preload ("res://enemybullet.tscn") 		# Preload the bullet scene so it can spawn
+var iconHeavyMG = preload ("res://icon_machine_gun.tscn") 	# The icon for Heavy Machine Gun
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,11 +60,20 @@ func _process(_delta):
 
 func _on_area_entered(area):
 	if area.is_in_group("playerBullet"):
+		
+		var randomNum = randi_range(1,100)
+		
 		var bm = boom.instantiate() # Creates an instance of an explosion at the enemy
 		add_sibling(bm)
 		get_node("../").add_score(1)
 		bm.play("Boom")
 		bm.global_position = global_position
+		
+		if randomNum >= 50 and get_node("../Player").hasMachineGun == false:
+			var icon = iconHeavyMG.instantiate()
+			add_sibling(icon)
+			icon.global_position = bm.global_position
+		
 		queue_free()
 		
 		

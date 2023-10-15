@@ -25,9 +25,8 @@ func _physics_process(_delta):
 func add_score (amount):
 	score += amount
 	get_node("UI/scoreText").text = str("Score: ", score)
+	print($Player.hasMachineGun)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	cameraPosition = $Player/Camera.get_target_position()
-	
-	print(score)

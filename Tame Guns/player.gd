@@ -8,7 +8,8 @@ var gravity : float = 900
 var updateCrossHairPos : Vector2
 var characterVector : Vector2
 
-var bullet = preload ("res://playerbullet.tscn") # Preload the bullet scene so it can spawn
+var bullet = preload ("res://playerbullet.tscn") # Preload the bullet scene
+var bulletMG = preload ("res://playerbulletMG.tscn") # Preload the MG bullet scene
 
 var canFire = true
 var canJump = true
@@ -16,25 +17,36 @@ var isMoving = false
 var isJumping = false
 var aimingMid = false
 var aimingHigh = false
+var hasMachineGun = false
+var machineGunAmmo : int = 0
 
 @onready var state_machine = $AnimationTree["parameters/playback"]
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
-@export var fireRate = .4
-@export var jumpRate = .6
+@export var fireRate = .4   # Fire rate for pistol (default)
+@export var fireRateMG = .1 # Fire rate for the machine gun
+@export var jumpRate = .6   # Jump speed
 
 func _ready():
-	animation_tree.active = true
+	animation_tree.active = true # This turns on the animations, I have them set to off in the editor UI
 
 func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and canFire and is_on_floor() and !isMoving:
-		var b = bullet.instantiate() # This creates a copy of the scene definied in var bullet above and thus the script for the bullet
-		owner.add_child(b)
-		b.transform = $shotSpawn.global_transform # Force the bullet to spawn at shotSpawn marker
-		canFire = false # Set ability to fire to false, so can't fire
-		await get_tree().create_timer(fireRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
-		canFire = true # Set fire back to true so can fire again
+		if !hasMachineGun:
+			var b = bullet.instantiate() # This creates a copy of the scene definied in var bullet above and thus the script for the bullet
+			owner.add_child(b)
+			b.transform = $shotSpawn.global_transform # Force the bullet to spawn at shotSpawn marker
+			canFire = false # Set ability to fire to false, so can't fire
+			await get_tree().create_timer(fireRate).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
+			canFire = true # Set fire back to true so can fire again
+		if hasMachineGun:
+			var c = bulletMG.instantiate() # This creates a copy of the scene definied in var bullet above and thus the script for the bullet
+			owner.add_child(c)
+			c.transform = $shotSpawn.global_transform # Force the bullet to spawn at shotSpawn marker
+			canFire = false # Set ability to fire to false, so can't fire
+			await get_tree().create_timer(fireRateMG).timeout # This waits to execute the next line. Adjust variable to be able to fire faster.
+			canFire = true # Set fire back to true so can fire again
 		
 	sprite_animations() # This function handles all of the player animations
 

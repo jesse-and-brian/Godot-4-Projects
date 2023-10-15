@@ -7,8 +7,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_nvbyd"]
 
 [node name="PlayerBullet" type="Area2D" groups=["playerBullet"]]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 2147483652
+collision_mask = 2147483652
 script = ExtResource("1_p4btc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
