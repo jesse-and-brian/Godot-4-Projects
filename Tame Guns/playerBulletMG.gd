@@ -11,7 +11,7 @@ extends Area2D
 func _ready():
 	if get_node("../Player").hasMachineGun:
 		get_node("../Player").machineGunAmmo -= 1
-		print( get_node("../Player").machineGunAmmo )
+#		print( get_node("../Player").machineGunAmmo )
 	#print(target) # print location of Crosshair node at creation of bullet instance
 	
 func _process(delta):
@@ -36,6 +36,8 @@ func _process(delta):
 	#position += (target - playerLocation) * speed * delta   # Old Version of bullet behavior
 	#print(position.x)
 	$Sprite.scale += Vector2(-.1,-.1) * speed * delta # Make bullets get smaller as they travel, but just the sprites. Collision stays big
+	if $Sprite.scale.x <= 0.5:
+		$CollisionShape2D.disabled = 1
 	if $Sprite.scale.x <= 0: # Destroy bullets when scale == 0
 		queue_free()
 	

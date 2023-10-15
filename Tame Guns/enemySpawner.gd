@@ -5,13 +5,15 @@ var enemy = preload ("res://enemy.tscn") # Preload the enemy scene so it can spa
 @onready var canSpawn : bool = true
 @onready var enemyPos : Vector2 = $Spawn_1.global_position
 @onready var enemySpawnDelay : int = 0
-
+var heavyMGIconExists = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#enemySpawnDelay += 1 # delays spawn
-	print_orphan_nodes()
+	#print_orphan_nodes()
+	print(heavyMGIconExists)
+	pass
 
 	if canSpawn:# and enemySpawnDelay >= 50:
 

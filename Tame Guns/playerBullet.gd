@@ -25,13 +25,17 @@ func _process(delta):
 	if global_position.distance_to(target) <= 5:
 		global_position += target * 0
 		$Sprite.scale += Vector2(-.1,-.1) * 10 * delta # More aggressively shrink the bullet when it reaches the target
+		
 	
 	#position = position.move_toward(target, speed)
 	#position += (target - playerLocation) * speed * delta   # Old Version of bullet behavior
 	#print(position.x)
 	$Sprite.scale += Vector2(-.1,-.1) * speed * delta # Make bullets get smaller as they travel, but just the sprites. Collision stays big
+	if $Sprite.scale.x <= 0.5:
+		$CollisionShape2D.disabled = 1
 	if $Sprite.scale.x <= 0: # Destroy bullets when scale == 0
 		queue_free()
+	
 	
 	
 func _physics_process(_delta):

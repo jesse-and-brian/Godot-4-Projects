@@ -19,8 +19,16 @@ func _unhandled_input(event):
 			get_node("Player").game_over()
 
 func _physics_process(_delta):
-	pass
-	#print(cameraPosition)
+	if get_node("Player").hasMachineGun == true:
+		$UI/AmmoIcon/Amount.text = str(get_node("Player").machineGunAmmo)
+		$UI/AmmoIcon/Amount.scale = Vector2(1,1)
+		$UI/AmmoIcon/Amount.set_position(Vector2(6,-8), true)
+		
+	if get_node("Player").hasMachineGun == false:
+		$UI/AmmoIcon/Amount.scale = Vector2(1.5,1.5)
+		$UI/AmmoIcon/Amount.text = str("∞")
+		$UI/AmmoIcon/Amount.set_position(Vector2(6,-13), true)
+	
 
 func add_score (amount):
 	score += amount

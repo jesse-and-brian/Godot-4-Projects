@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://deixco0ui4uk7"]
+[gd_scene load_steps=102 format=3 uid="uid://deixco0ui4uk7"]
 
 [ext_resource type="Script" path="res://Root.gd" id="1_58q0u"]
 [ext_resource type="AudioStream" uid="uid://cp3nd2sauq7bq" path="res://Sound/Music/04 Carson City.mp3" id="2_7cxmc"]
@@ -17,24 +17,23 @@
 [ext_resource type="AudioStream" uid="uid://cbdd3b46onr4l" path="res://Sound/Player/FOOTSTEPS (A) Walking Loop 01.wav" id="12_nafuj"]
 [ext_resource type="AudioStream" uid="uid://cfro27mtmgne" path="res://Sound/Weapons/metal_slug_heavy_mg.mp3" id="14_h5ehi"]
 
-[sub_resource type="SystemFont" id="SystemFont_bklir"]
-
-[sub_resource type="SystemFont" id="SystemFont_40c5t"]
+[sub_resource type="SystemFont" id="SystemFont_yofn4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gsja5"]
-font = SubResource("SystemFont_40c5t")
-font_size = 12
+font = SubResource("SystemFont_yofn4")
+font_size = 30
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
-shadow_size = 5
-
-[sub_resource type="SystemFont" id="SystemFont_jqq5p"]
+shadow_size = 10
+shadow_color = Color(0.113725, 0.113725, 0.113725, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ryqto"]
 size = Vector2(81.3333, 313.708)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1j7no"]
 size = Vector2(942.667, 15.3333)
+
+[sub_resource type="SystemFont" id="SystemFont_jqq5p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kbxl0"]
 size = Vector2(30, 2.5)
@@ -865,7 +864,6 @@ _data = {
 script = ExtResource("1_58q0u")
 
 [node name="UI" type="CanvasLayer" parent="."]
-process_mode = 3
 
 [node name="scoreText" type="Label" parent="UI"]
 anchors_preset = 3
@@ -873,23 +871,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1091.0
-offset_top = -32.0
-offset_right = -1034.0
-offset_bottom = -7.0
+offset_left = -200.0
+offset_top = -52.0
+offset_right = -10.0
+offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("SystemFont_bklir")
-theme_override_font_sizes/font_size = 12
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_gsja5")
+horizontal_alignment = 2
 
 [node name="Quit" type="RichTextLabel" parent="UI"]
 clip_contents = false
@@ -899,10 +889,10 @@ anchor_left = 1.086
 anchor_top = -0.287
 anchor_right = 1.516
 anchor_bottom = 0.078
-offset_left = -1245.07
-offset_top = 187.976
-offset_right = -1589.43
-offset_bottom = -19.544
+offset_left = -1200.07
+offset_top = 195.976
+offset_right = -1544.43
+offset_bottom = -11.544
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -922,10 +912,10 @@ anchor_left = 1.086
 anchor_top = -0.287
 anchor_right = 1.516
 anchor_bottom = 0.078
-offset_left = -1245.07
-offset_top = 204.976
-offset_right = -1589.43
-offset_bottom = -2.544
+offset_left = -1200.07
+offset_top = 212.976
+offset_right = -1544.43
+offset_bottom = 5.456
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -935,27 +925,6 @@ theme_override_constants/outline_size = 1
 text = "'Q' to Reload Game"
 scroll_active = false
 autowrap_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="AmmoIcon" type="Sprite2D" parent="UI"]
-position = Vector2(10, 632)
-scale = Vector2(2, 2)
-texture = ExtResource("6_kpp1t")
-
-[node name="Amount" type="Label" parent="UI/AmmoIcon"]
-offset_left = 4.0
-offset_top = -9.0
-offset_right = 30.0
-offset_bottom = 11.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource("SystemFont_jqq5p")
-theme_override_font_sizes/font_size = 12
-text = "∞"
-justification_flags = 0
-clip_text = true
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemySpawner" type="Node2D" parent="."]
@@ -1017,6 +986,25 @@ position = Vector2(1, 11)
 collision_layer = 2147483651
 collision_mask = 2147483651
 script = ExtResource("2_faqox")
+
+[node name="AmmoIcon" type="Sprite2D" parent="Player"]
+position = Vector2(-39, 20)
+texture = ExtResource("6_kpp1t")
+
+[node name="Amount" type="Label" parent="Player/AmmoIcon"]
+offset_left = 4.0
+offset_top = -9.0
+offset_right = 30.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_jqq5p")
+theme_override_font_sizes/font_size = 12
+text = "∞"
+justification_flags = 0
+clip_text = true
 
 [node name="Feet" type="CollisionShape2D" parent="Player"]
 position = Vector2(-3, 25.25)
