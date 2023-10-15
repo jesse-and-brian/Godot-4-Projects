@@ -12,7 +12,6 @@ var heavyMGIconExists = false
 func _process(_delta):
 	#enemySpawnDelay += 1 # delays spawn
 	#print_orphan_nodes()
-	print(heavyMGIconExists)
 	pass
 
 	if canSpawn:# and enemySpawnDelay >= 50:

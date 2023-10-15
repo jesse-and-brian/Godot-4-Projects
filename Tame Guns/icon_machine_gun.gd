@@ -3,6 +3,7 @@ extends Area2D
 
 func _ready():
 	await get_tree().create_timer(3).timeout
+	get_node("../EnemySpawner").heavyMGIconExists = false
 	queue_free()
 
 func _on_area_entered(area):

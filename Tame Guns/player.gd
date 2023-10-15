@@ -93,9 +93,6 @@ func sprite_animations():
 	var distancePlayerToTarget = abs(global_position - currentTargetPos) # This shows the distance of the target from the player
 	var animFlipChecker = currentTargetPos - global_position # This math tells me if it's to the left or right of the player
 	
-#	print("Moving: ", isMoving)
-#	print("Jumping: ", isJumping)
-	
 	if animFlipChecker.x < 0 and distancePlayerToTarget.x > 15: # Normal orientation
 		$AnimatedSprite2D.flip_h = 0
 		if aimingMid:
@@ -169,11 +166,9 @@ func sprite_animations():
 #
 	if isMoving and !isJumping:
 		state_machine.travel("Run")
-#		print($FootSteps.get_playback_position())
 #		if $FootSteps.get_playback_position() == 0:
 
 func aiming_close_mid(): # Leave this in for now, I have it hooked up to an aiming animation
 	pass
 		#animation_player.pause()
 		#call_deferred()
-		#print("Work in progress, leave in")
